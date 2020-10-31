@@ -15,7 +15,7 @@ export interface BaseUser extends BaseEntity {
 
 @Entity()
 export class User implements BaseUser {
-    @PrimaryGeneratedColumn({ type: "uuid" })
+    @PrimaryGeneratedColumn("uuid")
     id: string;
     @Column({ default: new Date().toISOString() })
     createdAt: string;
