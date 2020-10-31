@@ -6,14 +6,14 @@ import { BaseUser } from "../database/entities";
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
-	constructor(private authService: AuthService) {
-		super();
-	}
+    constructor(private authService: AuthService) {
+        super();
+    }
 
-	async validate(username: string, password: string): Promise<BaseUser> {
-		const user = await this.authService.validateUser(username, password);
-		if (!user) throw new UnauthorizedException();
+    async validate(username: string, password: string): Promise<BaseUser> {
+        const user = await this.authService.validateUser(username, password);
+        if (!user) throw new UnauthorizedException();
 
-		return user;
-	}
+        return user;
+    }
 }
