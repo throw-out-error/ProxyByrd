@@ -23,9 +23,12 @@ export class AuthService {
     async signup(user: User): Promise<User> {
         const hashedPassword = await hash(user.password, 10);
         try {
+            const users = await this.usersService.findAll();
             const createdUser = await this.usersService.create({
                 ...user,
-                password: hashedPassword
+                password: hashedPassword,
+                // Give admin role to first user
+                roles: users.length < 1 ? ["admin"] : []
             });
             return createdUser;
         } catch (error) {
@@ -36,16 +39,18 @@ export class AuthService {
                 );
             }
             throw new HttpException(
-                "Something went wrong",
+                error.message,
                 HttpStatus.INTERNAL_SERVER_ERROR
             );
         }
     }
 
-    async login(user: any) {
-        const payload = { username: user.username, sub: user.userId };
+    async login(user: BaseUser) {
+        const payload = { username: user.username, sub: user.id };
         return {
-            access_token: this.jwtService.sign(payload)
+            access_token: this.jwtService.sign(payload),
+            ...user,
+            password: undefined
         };
     }
 }

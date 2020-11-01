@@ -8,6 +8,7 @@ import {
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { BaseUser, User } from "../database/entities";
+import { Auth } from "./auth.decorator";
 import { AuthService } from "./auth.service";
 
 @Controller("auth")
@@ -17,17 +18,15 @@ export class AuthController {
     @UseGuards(AuthGuard("local"))
     @Post("login")
     async login(@Request() req): Promise<BaseUser> {
-        return { ...req.user, password: undefined };
+        return this.authService.login(req.user);
     }
 
-    @UseGuards(AuthGuard("local"))
     @Post("signup")
     async signup(@Body() user: User): Promise<BaseUser> {
-        console.log(user);
         return this.authService.signup(user);
     }
 
-    @UseGuards(AuthGuard("jwt"))
+    @Auth()
     @Get("profile")
     async getProfile(@Request() req) {
         return req.user;

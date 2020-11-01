@@ -9,6 +9,9 @@
         "type": "git",
         "url": "git+https://github.com/throw-out-error/ProxyBryd.git"
     },
+    "files": [
+        "dist"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC",

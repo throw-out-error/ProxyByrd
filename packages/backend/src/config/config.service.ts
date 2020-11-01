@@ -4,7 +4,7 @@ import * as Joi from "@hapi/joi";
 import { KnexOptions, KnexOptionsFactory } from "@nestjsplus/knex";
 import { join } from "path";
 import { TypeOrmOptionsFactory, TypeOrmModuleOptions } from "@nestjs/typeorm";
-import { User } from "../database/entities";
+import { User, Site, Route } from "../database/entities";
 
 @Injectable()
 export class ConfigService extends ConfigManager
@@ -89,7 +89,7 @@ export class ConfigService extends ConfigManager
             database: this.get<string>("DB_NAME"),
             port: this.get<number>("DB_PORT"),
             logging: this.get<boolean>("DB_DEBUG") ? ["error"] : false,
-            entities: [User],
+            entities: [User, Site, Route],
             synchronize: true
         };
     }

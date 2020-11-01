@@ -7,7 +7,7 @@ import { BaseUser } from "../database/entities";
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
     constructor(private authService: AuthService) {
-        super();
+        super({ passReqToCallback: true });
     }
 
     async validate(username: string, password: string): Promise<BaseUser> {

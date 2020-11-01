@@ -17,4 +17,8 @@ export class UsersService {
         await this.usersRepository.insert(user);
         return this.findOne(user.username);
     }
+
+    async findAll(): Promise<User[]> {
+        return await this.usersRepository.find({});
+    }
 }
