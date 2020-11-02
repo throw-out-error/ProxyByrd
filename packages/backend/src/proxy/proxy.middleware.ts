@@ -18,6 +18,7 @@ export class ReverseProxyMiddleware implements NestMiddleware {
         res.status(404).send(`<h1>404 ${obj} Not Found</h1>`);
     }
 
+    // deepcode ignore NoRateLimitingForExpensiveWebOperation: <please specify a reason of ignoring this>
     async use(req: Request, res: Response): Promise<void> {
         const proxy = httpProxy.createProxyServer();
         const site = await this.siteRepository.findOne({
