@@ -28,7 +28,7 @@ devDependencies:
   '@nestjs/testing': 7.4.4_a073563eda6e2cb33ae79215800d4b16
   '@types/bcrypt': 3.0.0
   '@types/express': 4.17.8
-  '@types/jest': 26.0.10
+  '@types/jest': 26.0.15
   '@types/node': 13.13.30
   '@types/passport-local': 1.0.33
   '@types/supertest': 2.0.10
@@ -1003,6 +1003,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-i2m0oyh8w/Lum7wWK/YOZJakYF8Mx08UaKA1CtbmFeDquVhAEdA7znacsVSf2hJ1OQ/OfVMGN90pw/AtzF8s/Q==
+  /@types/jest/26.0.15:
+    dependencies:
+      jest-diff: 26.6.1
+      pretty-format: 26.6.1
+    dev: true
+    resolution:
+      integrity: sha512-s2VMReFXRg9XXxV+CW9e5Nz8fH2K1aEhwgjUqPPbQd7g95T0laAcvLv032EhFHIa5GHsZ8W7iJEQVaJq6k3Gog==
   /@types/json-schema/7.0.6:
     dev: true
     resolution:
@@ -8741,7 +8748,7 @@ specifiers:
   '@toes/core': ^0.0.6-dev
   '@types/bcrypt': ^3.0.0
   '@types/express': ^4.17.3
-  '@types/jest': 26.0.10
+  '@types/jest': 26.0.15
   '@types/node': ^13.9.1
   '@types/passport-local': ^1.0.33
   '@types/supertest': ^2.0.8
