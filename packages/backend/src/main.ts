@@ -4,6 +4,7 @@ import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
+
     const options = new DocumentBuilder()
         .setTitle("ProxyByrd API")
         .setDescription("The ProxyByrd API description")

@@ -1,17 +1,25 @@
 import { Module, Global } from "@nestjs/common";
-import { ConfigManagerModule } from "@nestjsplus/config";
+import { ConfigModule as NestConfigModule } from "@nestjs/config";
 import { ConfigService } from "./config.service";
 import { join } from "path";
+import { readFileSync } from "fs";
+import yaml from "yam";
+
 @Global()
 @Module({
     imports: [
-        ConfigManagerModule.register({
-            useEnv: {
-                folder: join(__dirname, "..", "..", "..", "..", "config")
-            }
-        })
+        NestConfigModule.forRoot({
+            load: [
+                () =>
+                    yaml.parse(
+                        readFileSync(`${__dirname}/../../../config.yml`, {
+                            encoding: "utf-8",
+                        })
+                    ),
+            ],
+        }),
     ],
-    providers: [ConfigService],
-    exports: [ConfigService]
+    providers: [],
+    exports: [NestConfigModule],
 })
 export class ConfigModule {}

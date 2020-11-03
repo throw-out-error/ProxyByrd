@@ -4,16 +4,16 @@ import { ConfigService } from "../config/config.service";
 // import { KnexModule } from "@nestjsplus/knex";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Route, User, Site } from "./entities";
+import { ConfigModule } from "../config/config.module";
 
 @Module({
     imports: [
         TypeOrmModule.forRootAsync({
-            useExisting: ConfigService,
-            inject: [ConfigService]
+            useClass: ConfigService,
+            imports: [ConfigModule],
         }),
-        TypeOrmModule.forFeature([User, Site, Route])
     ],
     providers: [UsersService],
-    exports: [UsersService, TypeOrmModule.forFeature([User, Site, Route])]
+    exports: [UsersService, TypeOrmModule.forFeature([User, Site, Route])],
 })
 export class DatabaseModule {}

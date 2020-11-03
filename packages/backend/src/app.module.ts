@@ -9,7 +9,7 @@ import { ProxyController } from "./proxy/proxy.controller";
 @Module({
     imports: [ConfigModule, AuthModule, DatabaseModule],
     controllers: [AppController, ProxyController],
-    providers: []
+    providers: [],
 })
 export class AppModule implements NestModule {
     configure(consumer: MiddlewareConsumer): void {
