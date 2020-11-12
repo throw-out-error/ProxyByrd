@@ -9,18 +9,14 @@ import { join } from "path";
 import { TypeOrmOptionsFactory, TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { User, Site, Route } from "../database/entities";
 import { ProxyByrdConfig } from "../util";
-import { proxy, ProxyStoreJSON } from "@sebastianspeitel/proxystore";
 
 @Injectable()
 export class ConfigService
     extends BaseConfigService<ProxyByrdConfig>
     implements KnexOptionsFactory, TypeOrmOptionsFactory {
     constructor(
-        @Optional()
-        @Inject(Constants.CONFIGURATION_TOKEN)
-        config: ProxyByrdConfig
     ) {
-        super(true, proxy(ProxyStoreJSON, {path: `${__dirname}/../../../config.json`}));
+        super(true, `${__dirname}/../../../config.json`);
     }
 
     // Our custom "schema"

@@ -1,21 +1,32 @@
 import get from "lodash.get";
 import Joi from "joi";
 import { PrefixLogger } from "@toes/core";
-import { ProxyStore } from "@sebastianspeitel/proxystore";
+import { ProxyStoreJSON } from "@sebastianspeitel/proxystore";
 
 export abstract class BaseConfigService<
 	K extends {} = Record<PropertyKey, unknown>
 > {
+	protected internalConfig: ProxyStoreJSON<K>;
+
 	constructor(
 		protected validate: boolean,
-		protected internalConfig: ProxyStore<K>
+		protected configPath: string,
+		defaultConfig?: K
 	) {
+		this.internalConfig = new ProxyStoreJSON(defaultConfig, {
+			path: configPath,
+		});
 		if (validate) {
 			const schema = this.getValidationSchema();
 			const res = schema.validate(this.internalConfig);
 			if (res.error)
 				new PrefixLogger("Config Validation").error(res.error.message);
-			else this.internalConfig = res.value;
+			else {
+				defaultConfig = res.value;
+				this.internalConfig = new ProxyStoreJSON(defaultConfig, {
+					path: configPath,
+				});
+			}
 		}
 	}
 
