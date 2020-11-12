@@ -1,5 +1,11 @@
 import { Home } from "./pages/home";
-import { Router } from "preact-router";
-import { render, h } from "preact";
+import { BrowserRouter, Route } from "react-router-dom";
+import { render } from "react-dom";
+import React from "react";
 
-render(<Router></Router>, document.body);
+render(
+    <BrowserRouter>
+        <Route path="/" exact component={Home} />
+    </BrowserRouter>,
+    document.querySelector("#root")
+);

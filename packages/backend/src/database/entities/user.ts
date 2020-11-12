@@ -1,5 +1,6 @@
 import { BaseEntity } from "./base";
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { ApiProperty } from "@nestjs/swagger";
 
 /**
  * User without password
@@ -7,6 +8,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 export interface BaseUser extends BaseEntity {
     username: string;
     email: string;
+    roles: string[];
 }
 
 /**
@@ -15,16 +17,25 @@ export interface BaseUser extends BaseEntity {
 
 @Entity()
 export class User implements BaseUser {
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
+    @PrimaryGeneratedColumn()
+    @ApiProperty()
+    id: number;
     @Column({ default: new Date().toISOString() })
+    @ApiProperty()
     createdAt: string;
     @Column({ default: new Date().toISOString() })
+    @ApiProperty()
     updatedAt: string;
-    @Column()
+    @Column({ unique: true })
+    @ApiProperty()
     username: string;
-    @Column()
+    @Column({ default: "admin@example.com" })
+    @ApiProperty()
     email: string;
     @Column()
+    @ApiProperty()
     password: string;
+    @Column("json")
+    @ApiProperty()
+    roles: string[];
 }

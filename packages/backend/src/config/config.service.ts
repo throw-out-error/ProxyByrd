@@ -1,13 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { ConfigManager } from "@nestjsplus/config";
-import * as Joi from "@hapi/joi";
+import Joi from "joi";
 import { KnexOptions, KnexOptionsFactory } from "@nestjsplus/knex";
 import { join } from "path";
 import { TypeOrmOptionsFactory, TypeOrmModuleOptions } from "@nestjs/typeorm";
-import { User } from "../database/entities";
+import { User, Site, Route } from "../database/entities";
 
 @Injectable()
-export class ConfigService extends ConfigManager
+export class ConfigService
+    extends ConfigManager
     implements KnexOptionsFactory, TypeOrmOptionsFactory {
     // Our custom "schema"
     // We supply it to the ConfigManager by extending the
@@ -19,38 +20,36 @@ export class ConfigService extends ConfigManager
             DB_HOST: {
                 validate: Joi.string(),
                 required: false,
-                default: "localhost"
+                default: "localhost",
             },
             DB_PORT: {
-                validate: Joi.number()
-                    .min(1)
-                    .max(65535),
+                validate: Joi.number().min(1).max(65535),
                 required: false,
-                default: 5432
+                default: 5432,
             },
             DB_USER: {
                 validate: Joi.string(),
-                required: true
+                required: true,
             },
             DB_PASS: {
                 validate: Joi.string(),
-                required: true
+                required: true,
             },
             DB_NAME: {
                 validate: Joi.string(),
                 required: false,
-                default: "proxybyrd"
+                default: "proxybyrd",
             },
             DB_DEBUG: {
                 validate: Joi.bool(),
                 required: false,
-                default: "false"
+                default: "false",
             },
             JWT_SECRET: {
                 validate: Joi.string(),
                 required: false,
-                default: "secret 1234"
-            }
+                default: "secret 1234",
+            },
         };
     }
 
@@ -67,16 +66,16 @@ export class ConfigService extends ConfigManager
                 password: this.get<string>("DB_PASS"),
                 database: this.get<string>("DB_NAME"),
                 port: this.get<number>("DB_PORT"),
-                debug: this.get<boolean>("DB_DEBUG")
+                debug: this.get<boolean>("DB_DEBUG"),
             },
             pool: {
                 min: 0,
-                max: 5
+                max: 5,
             },
             migrations: {
                 directory: join(__dirname, "..", "database", "migrations"),
-                loadExtensions: [".js", ".ts"]
-            }
+                loadExtensions: [".js", ".ts"],
+            },
         };
     }
 
@@ -89,8 +88,8 @@ export class ConfigService extends ConfigManager
             database: this.get<string>("DB_NAME"),
             port: this.get<number>("DB_PORT"),
             logging: this.get<boolean>("DB_DEBUG") ? ["error"] : false,
-            entities: [User],
-            synchronize: true
+            autoLoadEntities: true,
+            synchronize: true,
         };
     }
 }
