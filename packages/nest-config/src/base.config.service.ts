@@ -1,5 +1,4 @@
 import { Inject, Injectable, Optional } from "@nestjs/common";
-import get from "lodash.get";
 import {
 	CONFIGURATION_TOKEN,
 	VALIDATED_ENV_PROPNAME,
