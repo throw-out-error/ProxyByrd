@@ -12,8 +12,9 @@ import { ConfigModule } from "../config/config.module";
             useClass: ConfigService,
             imports: [ConfigModule],
         }),
+        TypeOrmModule.forFeature([User, Site, Route]),
     ],
     providers: [UsersService],
-    exports: [UsersService, TypeOrmModule.forFeature([User, Site, Route])],
+    exports: [TypeOrmModule, UsersService],
 })
 export class DatabaseModule {}

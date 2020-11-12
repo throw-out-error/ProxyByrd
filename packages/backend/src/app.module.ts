@@ -5,9 +5,18 @@ import { DatabaseModule } from "./database/database.module";
 import { ConfigModule } from "./config/config.module";
 import { ReverseProxyMiddleware } from "./proxy/proxy.middleware";
 import { ProxyController } from "./proxy/proxy.controller";
+import { join } from "path";
+import { ServeStaticModule } from "@nestjs/serve-static";
 
 @Module({
-    imports: [ConfigModule, AuthModule, DatabaseModule],
+    imports: [
+        ConfigModule,
+        ServeStaticModule.forRoot({
+            rootPath: join(__dirname, "..", "..", "frontend", "build"),
+        }),
+        AuthModule,
+        DatabaseModule,
+    ],
     controllers: [AppController, ProxyController],
     providers: [],
 })

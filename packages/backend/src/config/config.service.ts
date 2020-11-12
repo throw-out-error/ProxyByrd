@@ -1,22 +1,35 @@
-import { Injectable } from "@nestjs/common";
-import { ConfigManager } from "@nestjsplus/config";
+import { Inject, Injectable, Optional } from "@nestjs/common";
 import Joi from "joi";
+import {
+    BaseConfigService,
+    Constants,
+} from "@flowtr/nest-config";
 import { KnexOptions, KnexOptionsFactory } from "@nestjsplus/knex";
 import { join } from "path";
 import { TypeOrmOptionsFactory, TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { User, Site, Route } from "../database/entities";
+import { ProxyByrdConfig } from "../util";
+import { proxy, ProxyStoreJSON } from "@sebastianspeitel/proxystore";
 
 @Injectable()
 export class ConfigService
-    extends ConfigManager
+    extends BaseConfigService<ProxyByrdConfig>
     implements KnexOptionsFactory, TypeOrmOptionsFactory {
+    constructor(
+        @Optional()
+        @Inject(Constants.CONFIGURATION_TOKEN)
+        config: ProxyByrdConfig
+    ) {
+        super(true, proxy(ProxyStoreJSON, {path: `${__dirname}/../../../config.json`}));
+    }
+
     // Our custom "schema"
     // We supply it to the ConfigManager by extending the
     // ConfigManager class and implementing the
     // provideConfigSpec() method, which simply returns
     // our custom schema
-    provideConfigSpec() {
-        return {
+    getValidationSchema() {
+        return Joi.object({
             DB_HOST: {
                 validate: Joi.string(),
                 required: false,
@@ -25,15 +38,17 @@ export class ConfigService
             DB_PORT: {
                 validate: Joi.number().min(1).max(65535),
                 required: false,
-                default: 5432,
+                default: 27017,
             },
             DB_USER: {
                 validate: Joi.string(),
-                required: true,
+                required: false,
+                default: "",
             },
             DB_PASS: {
                 validate: Joi.string(),
-                required: true,
+                required: false,
+                default: "",
             },
             DB_NAME: {
                 validate: Joi.string(),
@@ -50,7 +65,7 @@ export class ConfigService
                 required: false,
                 default: "secret 1234",
             },
-        };
+        });
     }
 
     /**
@@ -58,7 +73,7 @@ export class ConfigService
      */
     createKnexOptions(): KnexOptions | Promise<KnexOptions> {
         return {
-            client: "pg",
+            client: "mongodb",
             debug: this.get<boolean>("DB_DEBUG"),
             connection: {
                 host: this.get<string>("DB_HOST"),

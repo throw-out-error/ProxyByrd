@@ -2,17 +2,19 @@
     "compilerOptions": {
         "module": "commonjs",
         "declaration": true,
-        "removeComments": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "target": "es2019",
-        "sourceMap": true,
-        "skipLibCheck": true,
+        "moduleResolution": "node",
         "outDir": "./dist",
-        "baseUrl": "./",
-        "incremental": true
+        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "resolveJsonModule": true
     },
     "include": ["src"],
     "exclude": ["**/node_modules", "**/dist"]

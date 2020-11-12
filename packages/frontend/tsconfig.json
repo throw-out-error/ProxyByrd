@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
+        "module": "esnext",
         "declaration": true,
         "removeComments": true,
         "emitDecoratorMetadata": true,
@@ -10,7 +10,17 @@
         "target": "es2019",
         "sourceMap": true,
         "outDir": "./dist",
-        "jsx": "react"
+        "jsx": "react",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true
     },
     "include": ["src"],
     "exclude": ["**/node_modules", "**/dist"]

@@ -1,32 +1,44 @@
 {
-    "name": "frontend",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "dev": "parcel src/index.html",
-        "start": "parcel watch src/index.html",
-        "build": "parcel build src/index.html"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "react": "^17.0.1",
-        "react-dom": "^17.0.1",
-        "react-router-dom": "^5.2.0"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.12.3",
-        "@babel/core": "^7.12.3",
-        "@babel/plugin-proposal-nullish-coalescing-operator": "^7.12.1",
-        "@babel/plugin-proposal-optional-chaining": "^7.12.1",
-        "@babel/plugin-transform-react-jsx": "^7.12.1",
-        "@babel/preset-env": "^7.12.1",
-        "@babel/preset-typescript": "^7.12.1",
-        "@types/react": "^16.9.55",
-        "@types/react-dom": "^16.9.9",
-        "@types/react-router-dom": "^5.1.6",
-        "parcel": "^1.12.4"
-    }
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "react-scripts build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL-v3.0-or-later",
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "axios": "^0.21.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.12.1",
+    "@babel/plugin-proposal-optional-chaining": "^7.12.1",
+    "@babel/plugin-transform-react-jsx": "^7.12.5",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-typescript": "^7.12.1",
+    "@types/react": "^16.9.56",
+    "@types/react-dom": "^16.9.9",
+    "@types/react-router-dom": "^5.1.6",
+    "parcel": "^1.12.4",
+    "react-scripts": "^4.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
