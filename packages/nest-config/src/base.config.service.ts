@@ -1,9 +1,4 @@
-import { Inject, Injectable, Optional } from "@nestjs/common";
-import {
-	CONFIGURATION_TOKEN,
-	VALIDATED_ENV_PROPNAME,
-} from "./config.constants";
-import { NoInferType } from "./types";
+import get from "lodash.get";
 import Joi from "joi";
 import { PrefixLogger } from "@toes/core";
 import { ProxyStore } from "@sebastianspeitel/proxystore";
