@@ -27,7 +27,7 @@
         "@nestjs/swagger": "^4.6.1",
         "@nestjs/typeorm": "^7.1.4",
         "@nestjsplus/knex": "^1.0.0",
-        "@toes/core": "^0.0.6-dev",
+        "@toes/core": "^0.0.3",
         "bcrypt": "^5.0.0",
         "http-proxy": "^1.18.1",
         "http-proxy-middleware": "^1.0.6",
