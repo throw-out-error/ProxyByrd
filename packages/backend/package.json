@@ -30,7 +30,7 @@
         "@toes/core": "^0.0.6-dev",
         "bcrypt": "^5.0.0",
         "http-proxy": "^1.18.1",
-        "http-proxy-middleware": "^1.0.6",
+        "http-proxy-middleware": "2.0.0",
         "joi": "^17.3.0",
         "knex": "^0.21.12",
         "nest-access-control": "^2.0.2",
