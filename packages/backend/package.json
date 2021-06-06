@@ -32,7 +32,7 @@
         "http-proxy": "^1.18.1",
         "http-proxy-middleware": "^1.0.6",
         "joi": "^17.3.0",
-        "knex": "^0.21.12",
+        "knex": "0.95.6",
         "nest-access-control": "^2.0.2",
         "passport": "^0.4.1",
         "passport-jwt": "^4.0.0",
